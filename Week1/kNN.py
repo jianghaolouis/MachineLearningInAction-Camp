@@ -38,7 +38,7 @@ def file2mat(fileName, delimeter = '\t') :
 
         for line in raw_data:
             line = line.strip()                             #strip(), take all the char btw the given char in the str, if '', then take the whole line
-            list_By_line = line.split(delimeter)                 #element delimited by the tab char
+            list_By_line = line.split(delimeter)            #element delimited by the tab char
             return_array[index,:] = list_By_line[0:3]
             if(list_By_line[-1].isdigit()):                 #test if the last columne is digital value. create a dict to transfer str to digit
                 label_Vector.append(int(list_By_line[-1]))
@@ -48,7 +48,64 @@ def file2mat(fileName, delimeter = '\t') :
 
     return return_array, np.array(label_Vector)
 
+def load_image(filepath):
+    '''
+    load data from a image-like file
+
+    Parameters:
+    -----------
+    fname: str or path-like object( absolute or current working dir)
+
+    Results:
+    numpy feature: array.
+        the feature vector with the shape (n_features,) 
+    '''
+    with open(filepath,'r') as file:
+        raw_image = [row.strip() for row in file.readlines()]
+        raw_image = np.array(list(''.join(raw_image)),dtype = 'i4')     # i4 means int32
+    return raw_image
+
+def image_features(folder):
+    '''
+    get all digit images into a numpy array which serves as the feature array of kNN
+
+    Parameters:
+    -----------
+    folder path : str or working path dir
+        the name of folder where the images are stored.
+    Return
+    '''
+    pass
+
+def img2vec(filename):
+    with open(filename,'r') as fr:
+        raw_image = fr.readlines()                     # text is a string format
+        vec = []
+        for raw in raw_image :
+            raw = raw.strip()
+            vec.append(np.array(list(''.join(raw)),dtype = 'i4'))
+    return vec
+
+
 def kNN_Classify0(inX, dataset, labels, k):
+    '''
+    K nearest neighbor algorithm
+
+    Parameter:
+    ----------
+    inX: array.
+        sample waiting to be classified.
+    dataset: array.
+        training set.
+    labels: vector
+    K: parameter of nb_neighbor
+
+    Results:
+    --------
+    sortedClassCount[0][0] : one element of array
+        the prediction of label
+'''
+
     #distance calc
     datasetSize = dataset.shape[0]              #shape returns the dim of array,  (n , m) first indice 0 is dim n
     rep_inX = np.tile(inX, (datasetSize,1))     #tile is repeating the array inX to (n,m) times, (n,1) means copy into n time in row 
