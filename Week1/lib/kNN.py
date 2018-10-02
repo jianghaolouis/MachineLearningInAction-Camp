@@ -12,9 +12,8 @@ import numpy as np
 import operator                          #for sorting
 import matplotlib.pyplot as plt
 import os
-from utility import *
 
-def kNN_Classify0(inX, dataset, labels, k):
+def kNN_Classify0(inX, dataset, labels, k = 5):
     '''
     K nearest neighbor algorithm
 

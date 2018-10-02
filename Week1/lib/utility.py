@@ -2,7 +2,7 @@ import numpy as np
 import operator                          #for sorting
 import matplotlib.pyplot as plt
 import os
-import kNN
+from lib import kNN
 
 def CreateDataset():
     _group = np.array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])
@@ -77,7 +77,7 @@ def images_data(folder):
     #initialize feature array (n_sample,n_feature)
     n_s = len(fld)
     n_f = len(load_image(os.path.join(folder,fld[0])))
-    f_array = np.empty(n_s, n_f, dtype = 'i4')
+    f_array = np.empty([n_s, n_f], dtype = 'i4')
     label = np.empty(n_s, dtype = 'i4')
 
     #put the image vector into each line of feature array
@@ -159,9 +159,10 @@ def ErrorTest(ratio,filename,k, method = 'kNN'):
     x_test,y_test,x_train,y_train = Split_train_set(_X,_y,ratio)
     err_Count = 0.0
     for i in range(len(x_test)):
-        Predict_rs = kNN.kNN_Classify0(x_test[i], _X, _y, k)
+        Predict_rs = lkNN.kNN_Classify0(x_test[i], _X, _y, k)
         # print( "the classifer came back with : %s, the real answer is :%s" %(Predict_rs,y_test[i]))
         if (Predict_rs != y_test[i]): err_Count += 1.0
     errorRate = err_Count/float(len(x_test))        
     #print("the total error rate is : %f " % errorRate)
     return errorRate
+

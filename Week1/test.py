@@ -1,3 +1,8 @@
-import kNN
-img_vector = kNN.load_image('/Users/jianghao/Desktop/ML_in_action/MachineLearningInAction-Camp/Week1/digits/trainingDigits/0_4.txt')
-print(img_vector)
+import os
+from lib.utility import load_image, images_data
+from lib import kNN
+
+import matplotlib.pyplot as plt
+import matplotlib
+
+train_f,train_l = images_data('data/digits/trainingDigits')
