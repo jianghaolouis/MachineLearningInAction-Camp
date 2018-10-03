@@ -159,7 +159,7 @@ def ErrorTest(ratio,filename,k, method = 'kNN'):
     x_test,y_test,x_train,y_train = Split_train_set(_X,_y,ratio)
     err_Count = 0.0
     for i in range(len(x_test)):
-        Predict_rs = lkNN.kNN_Classify0(x_test[i], _X, _y, k)
+        Predict_rs = kNN.kNN_Classify0(x_test[i], _X, _y, k)
         # print( "the classifer came back with : %s, the real answer is :%s" %(Predict_rs,y_test[i]))
         if (Predict_rs != y_test[i]): err_Count += 1.0
     errorRate = err_Count/float(len(x_test))        
